@@ -6,6 +6,10 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/key');
 const passport = require('passport');
 
+// load input validation
+
+const validateRegisterInput = require('../../validation/register');
+
 //load user model
 
 const User = require('../../models/User');
@@ -20,6 +24,13 @@ router.get('/test', (req, res) => res.json({ msg: 'Users works' }));
 // @access Public
 
 router.post('/register', (req, res) => {
+	const { errors, isValid } = validateRegisterInput(req.body);
+
+	//check validation
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
+
 	User.findOne({ email: req.body.email }).then(user => {
 		if (user) {
 			return res.status(400).json({ email: 'Email already exists' });
@@ -70,7 +81,7 @@ router.post('/login', (req, res) => {
 		bcrypt.compare(password, user.password).then(isMatch => {
 			if (isMatch) {
 				//user matched
-				const payload = { id: user.id, name: user.name, avatar: user.avatar }; //creat jwt payload
+				const payload = { id: user.id, name: user.name, avatar: user.avatar }; //create jwt payload
 				//sign token
 				jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
 					res.json({
