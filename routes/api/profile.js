@@ -48,13 +48,12 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 
 router.get('/all', (req, res) => {
 	Profile.find()
-		.populate('users', ['name', 'avatar'])
+		.populate('users', ['name', 'avatar', 'courses'])
 		.then(profiles => {
 			if (!profiles) {
 				errors.noprofile = 'There are no profiles';
 				return res.status(404).json(errors);
 			}
-
 			res.json(profiles);
 		})
 		.catch(err => {

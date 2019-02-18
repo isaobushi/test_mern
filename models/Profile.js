@@ -112,6 +112,26 @@ const ProfileSchema = new Schema({
 			type: String,
 		},
 	},
+
+	courses: [
+		{
+			course: {
+				type: Schema.Types.ObjectId,
+				ref: 'courses',
+			},
+			level: {
+				type: Number,
+				default: 1,
+			},
+			title: {
+				type: String,
+			},
+			date: {
+				type: Date,
+				default: Date.now,
+			},
+		},
+	],
 	date: {
 		type: Date,
 		default: Date.now,
