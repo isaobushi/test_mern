@@ -130,6 +130,10 @@ const ProfileSchema = new Schema({
 				type: Date,
 				default: Date.now,
 			},
+			dateEnd: {
+				type: Number,
+				on: Boolean,
+			},
 		},
 	],
 	date: {
