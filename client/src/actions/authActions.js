@@ -17,7 +17,7 @@ export const registerUser = (userData, history) => dispatch => {
 		);
 };
 
-// logim - get user token
+// login - get user token
 
 export const loginUser = userData => dispatch => {
 	axios
