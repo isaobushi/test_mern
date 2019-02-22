@@ -21,7 +21,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Questions works' }));
 // @desc get first question
 // @access Private
 router.get('/:course_id/start', passport.authenticate('jwt', { session: false }), (req, res) => {
-	let level = 0;
+	let level = 1;
 
 	// set timer
 	let limit = 3;
@@ -93,7 +93,7 @@ router.get('/:course_id/start', passport.authenticate('jwt', { session: false })
 				variablesValues: variables,
 				user: req.user.id,
 			});
-
+			console.log(newQuestion);
 			newQuestion.save().then(question => res.json(question));
 		});
 });

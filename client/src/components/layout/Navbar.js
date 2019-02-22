@@ -17,6 +17,17 @@ class Navbar extends Component {
 		const authLinks = (
 			<ul className="navbar-nav ml-auto">
 				<li className="nav-item">
+					<Link className="nav-link" to="/courses">
+						{' '}
+						Courses
+					</Link>
+				</li>
+				<li className="nav-item">
+					<Link className="nav-link" to="/dashboard">
+						Dashboard
+					</Link>
+				</li>
+				<li className="nav-item">
 					<a href="www.google.it" className="nav-link" onClick={this.onLogoutClick.bind(this)}>
 						<img
 							className="rounded-circle"
@@ -56,14 +67,7 @@ class Navbar extends Component {
 					</button>
 
 					<div className="collapse navbar-collapse" id="mobile-nav">
-						<ul className="navbar-nav mr-auto">
-							<li className="nav-item">
-								<Link className="nav-link" to="/profiles">
-									{' '}
-									Teachers
-								</Link>
-							</li>
-						</ul>
+						<ul className="navbar-nav mr-auto" />
 						{isAuthenticated ? authLinks : guestLinks}
 					</div>
 				</div>

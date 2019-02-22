@@ -33,7 +33,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 router.get('/all', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Course.find()
 		.then(course => res.json(course))
-		.catch(err => res.status(404).json({ noCourseWasFound: 'No corse found' }));
+		.catch(err => res.status(404).json({ noCourseWasFound: 'No courses found' }));
 });
 
 //@route POST api/courses/:id_course
