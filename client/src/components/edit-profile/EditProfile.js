@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import propTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
@@ -152,7 +152,7 @@ class CreateProfile extends Component {
 									info="A unique handle for your profile URL, your full name, nickname etc "
 								/>
 								<SelectListGroup
-									placeholder="Status"
+									placeholder="status"
 									name="status"
 									value={this.state.status}
 									onChange={this.onChange}

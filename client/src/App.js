@@ -16,6 +16,10 @@ import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import Courses from './components/courses/Courses';
+import CoursePreview from './components/courses/CoursePreview';
+import Question from './components/question/Question';
+import Profiles from './components/Profiles/Profile';
+import Profile from './components/Profile/Profile';
 
 import PrivateRoute from './components/common/PrivateRoute';
 
@@ -56,6 +60,9 @@ class App extends Component {
 						<div className="container">
 							<Route exact path="/register" component={Register} />
 							<Route exact path="/login" component={Login} />
+							<Route exact path="/Profiles" component={Profiles} />
+							<Route exact path="/Profile/:handle" component={Profile} />
+
 							<Switch>
 								<PrivateRoute exact path="/dashboard" component={Dashboard} />
 							</Switch>
@@ -67,6 +74,16 @@ class App extends Component {
 							</Switch>
 							<Switch>
 								<PrivateRoute exact path="/courses" component={Courses} />
+							</Switch>
+							<Switch>
+								<PrivateRoute path="/courses/:id_courses" component={CoursePreview} />
+							</Switch>
+							<Switch>
+								<PrivateRoute
+									exact
+									path="/questions/5c6f2a197d89e26466c9a039/start"
+									component={Question}
+								/>
 							</Switch>
 						</div>
 						<Footer />

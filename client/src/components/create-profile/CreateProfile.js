@@ -6,7 +6,6 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import { createProfile } from '../../actions/profileActions';
-import { withRouther } from 'react-router-dom';
 
 class CreateProfile extends Component {
 	constructor(props) {
@@ -119,7 +118,7 @@ class CreateProfile extends Component {
 									info="A unique handle for your profile URL, your full name, nickname etc "
 								/>
 								<SelectListGroup
-									placeholder="Status"
+									placeholder="status"
 									name="status"
 									value={this.state.status}
 									onChange={this.onChange}

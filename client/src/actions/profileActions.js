@@ -2,18 +2,19 @@ import axios from 'axios';
 
 import {
 	GET_PROFILE,
+	GET_PROFILES,
 	PROFILE_LOADING,
 	CLEAR_CURRENT_PROFILE,
 	GET_ERRORS,
-	// DELETE_CURRENT_PROFILE,
 	SET_CURRENT_USER,
 	GET_COURSES,
+	GET_SINGLE_COURSE,
 } from './types';
 
 //GET courses
 export const getCourses = () => dispatch => {
 	axios
-		.get('/api/courses/all')
+		.get('/api/courses')
 		.then(res =>
 			dispatch({
 				type: GET_COURSES,
@@ -24,6 +25,47 @@ export const getCourses = () => dispatch => {
 			dispatch({
 				type: GET_COURSES,
 				payload: {},
+			})
+		);
+};
+
+//GET single course
+export const getSingleCourse = params => dispatch => {
+	axios
+		.get(`/api/courses/`, {
+			params: {
+				params,
+			},
+		})
+		.then(res =>
+			dispatch({
+				type: GET_SINGLE_COURSE,
+				payload: res.data,
+			})
+		)
+		.catch(err =>
+			dispatch({
+				type: GET_SINGLE_COURSE,
+				payload: {},
+			})
+		);
+};
+
+// User register one course
+
+export const registerCourse = (params, userData) => dispatch => {
+	axios
+		.post(`/api/courses/${params.course_id}`, userData)
+		.then(res =>
+			dispatch({
+				type: GET_PROFILE,
+				payload: res.data,
+			})
+		)
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data,
 			})
 		);
 };
@@ -93,4 +135,42 @@ export const deleteAccount = () => dispatch => {
 				})
 			);
 	}
+};
+
+// GET ALL PROFILES
+export const getProfiles = () => dispatch => {
+	dispatch(setProfileLoading());
+	axios
+		.get('/api/profile/all')
+		.then(res =>
+			dispatch({
+				type: GET_PROFILES,
+				payload: res.data,
+			})
+		)
+		.catch(err =>
+			dispatch({
+				type: GET_PROFILES,
+				payload: null,
+			})
+		);
+};
+
+// GET  PROFILE by Handle
+export const getProfileByHandle = handle => dispatch => {
+	dispatch(setProfileLoading());
+	axios
+		.get(`/api/profile/handle/${handle}`)
+		.then(res =>
+			dispatch({
+				type: GET_PROFILE,
+				payload: res.data,
+			})
+		)
+		.catch(err =>
+			dispatch({
+				type: GET_PROFILE,
+				payload: null,
+			})
+		);
 };

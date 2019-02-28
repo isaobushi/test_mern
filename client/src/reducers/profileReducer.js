@@ -1,4 +1,11 @@
-import { GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_COURSES } from '../actions/types';
+import {
+	GET_PROFILE,
+	GET_PROFILES,
+	PROFILE_LOADING,
+	CLEAR_CURRENT_PROFILE,
+	GET_COURSES,
+	GET_SINGLE_COURSE,
+} from '../actions/types';
 
 const initialState = {
 	profile: null,
@@ -20,6 +27,12 @@ export default function(state = initialState, action) {
 				profile: action.payload,
 				loading: false,
 			};
+		case GET_PROFILES:
+			return {
+				...state,
+				profiles: action.payload,
+				loading: false,
+			};
 		case CLEAR_CURRENT_PROFILE:
 			return {
 				...state,
@@ -31,6 +44,13 @@ export default function(state = initialState, action) {
 				courses: action.payload,
 				loading: true,
 			};
+		case GET_SINGLE_COURSE:
+			return {
+				...state,
+				courses: action.payload,
+				loading: true,
+			};
+
 		default:
 			return state;
 	}

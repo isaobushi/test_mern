@@ -3,16 +3,33 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
-import { clearCurrentProfile } from '../../actions/profileActions';
+import { getCurrentProfile, clearCurrentProfile } from '../../actions/profileActions';
 
 class Navbar extends Component {
+	state = {
+		toggle: false,
+	};
+
+	componentDidMount() {
+		getCurrentProfile();
+	}
+
+	toggleMenu = () => this.setState({ toggle: !this.state.toggle });
+
 	onLogoutClick = e => {
 		e.preventDefault();
 		this.props.clearCurrentProfile();
 		this.props.logoutUser();
 	};
 	render() {
+		const { toggle } = this.state;
+		const show = toggle ? 'show' : '';
 		const { isAuthenticated, user } = this.props.auth;
+		const { profile } = this.props.profile;
+		let handle = '';
+		if (profile !== null && profile !== {}) {
+			handle = profile.handle;
+		}
 
 		const authLinks = (
 			<ul className="navbar-nav ml-auto">
@@ -23,12 +40,18 @@ class Navbar extends Component {
 					</Link>
 				</li>
 				<li className="nav-item">
+					<Link className="nav-link" to={`/profile/${handle}`}>
+						{' '}
+						Profile
+					</Link>
+				</li>
+				<li className="nav-item">
 					<Link className="nav-link" to="/dashboard">
 						Dashboard
 					</Link>
 				</li>
 				<li className="nav-item">
-					<a href="www.google.it" className="nav-link" onClick={this.onLogoutClick.bind(this)}>
+					<a href="/dashboard" className="nav-link" onClick={this.onLogoutClick.bind(this)}>
 						<img
 							className="rounded-circle"
 							src={user.avatar}
@@ -62,13 +85,23 @@ class Navbar extends Component {
 					<Link className="navbar-brand" to="/">
 						Tune In
 					</Link>
-					<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+					<button
+						className="navbar-toggler"
+						type="button"
+						data-toggle="collapse"
+						data-target="#mobile-nav"
+						onClick={this.toggleMenu}
+					>
 						<span className="navbar-toggler-icon" />
 					</button>
-
-					<div className="collapse navbar-collapse" id="mobile-nav">
-						<ul className="navbar-nav mr-auto" />
-						{isAuthenticated ? authLinks : guestLinks}
+					<div
+						className={!show ? 'collapse navbar-collapse' : `collapse navbar-collapse ${show}`}
+						id="mobile-nav"
+					>
+						<div className="collapse navbar-collapse" id="mobile-nav">
+							<ul className="navbar-nav mr-auto" />
+							{isAuthenticated ? authLinks : guestLinks}
+						</div>
 					</div>
 				</div>
 			</nav>
@@ -77,15 +110,17 @@ class Navbar extends Component {
 }
 
 Navbar.propTypes = {
+	getCurrentProfile: propTypes.func,
 	logoutUser: propTypes.func.isRequired,
 	clearCurrentProfile: propTypes.func.isRequired,
 	auth: propTypes.object.isRequired,
 };
 const mapStateToProps = state => ({
 	auth: state.auth,
+	profile: state.profile,
 });
 
 export default connect(
 	mapStateToProps,
-	{ logoutUser, clearCurrentProfile }
+	{ logoutUser, clearCurrentProfile, getCurrentProfile }
 )(Navbar);
