@@ -30,7 +30,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 //@route GET api/courses/all
 // @desc add course to system ( by teacher )
 // @access Private
-router.get('/all', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Course.find()
 		.then(course => res.json(course))
 		.catch(err => res.status(404).json({ noCourseWasFound: 'No courses found' }));
@@ -41,25 +41,50 @@ router.get('/all', passport.authenticate('jwt', { session: false }), (req, res) 
 // @access Private
 
 router.post('/:id_course', passport.authenticate('jwt', { session: false }), (req, res) => {
+	const exists = false;
 	Course.findOne({ _id: req.params.id_course }).then(course => {
-		Profile.findOne({ user: req.user.id }).then(profile => {
-			console.log(profile.courses);
-			profile.courses.map(materia => {
-				if (materia.id === course.id) {
-					return res.json({ error: 'already registered' });
+		Profile.findOne({ user: req.user.id })
+			.then(profile => {
+				profile.courses.map(materia => {
+					if (materia.id === course.id) {
+						console.log('in');
+						return (exists = true);
+					}
+				});
+
+				if (exists === false) {
+					profile.courses.length === 0 ? (profile.courses = [course]) : profile.courses.push(course);
+
+					course.users.length === 0 ? (course.users = [req.user.id]) : course.users.push(req.user.id);
+					course.save();
+					console.log(course);
+					profile.save().then(() => res.redirect('/'));
 				}
-			});
-			profile.courses.length === 0 ? (profile.courses = [course]) : profile.courses.push(course);
-			profile.save().then(() => res.json({ msg: 'profile update' }));
-		});
+			})
+			.catch(err => res.json({ msg: 'already registered' }));
 	});
 });
+
+//@route GET api/courses/:id_course
+// @desc get course details ( by user )
+// @access Private
+
+router.get('/:id_course', passport.authenticate('jwt', { session: false }), (req, res) => {
+	let params = req.query.id_course;
+	Course.findById(params)
+		.then(course => res.json(course))
+		.catch(err => res.json({ msg: 'course not found' }));
+});
+
+//@route DELETE api/courses/:id_course
+// @desc get course details ( by user )
+// @access Private
 
 router.delete('/:id_course', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Course.findOne({ _id: req.params.id_course }).then(course => {
 		Profile.findOne({ user: req.user.id }).then(profile => {
 			profile.courses.map(materia => {
-				if (materia.id === course.id) {
+				if (materia.id === course) {
 					materia.remove();
 					profile.save().then(message => res.json({ msg: 'profile course deleted & profile update ' }));
 				}

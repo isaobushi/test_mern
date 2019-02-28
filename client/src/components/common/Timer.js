@@ -13,12 +13,6 @@ class Timer extends Component {
 			styleButton: { display: 'block' },
 		};
 	}
-	componentWillMount() {
-		this.props.startTimer(this.props.history);
-	}
-	componentWillUnmount() {
-		this.props.startTimer(this.props.history);
-	}
 
 	countDown = () => {
 		this.setState({
@@ -39,7 +33,7 @@ class Timer extends Component {
 		setInterval(() => {
 			this.countDown();
 			if (this.state.counter === 0) {
-				this.startTimer(this.props.history);
+				this.props.history.push('/dashboard');
 			}
 		}, 1000);
 	};
@@ -67,14 +61,4 @@ class Timer extends Component {
 	}
 }
 
-Timer.propTypes = {
-	startTimer: propTypes.func.isRequired,
-};
-const mapDispatchToProps = dispatch => {
-	return this.props.history.push('/dasboard');
-};
-
-export default connect(
-	mapDispatchToProps,
-	startTimer
-)(Timer);
+export default withRouter(Timer);

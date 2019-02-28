@@ -10,7 +10,6 @@
 		"moment": "^2.24.0",
 		"react": "^16.8.2",
 		"react-dom": "^16.8.2",
-		"react-materialize": "^2.6.0",
 		"react-moment": "^0.8.4",
 		"react-redux": "^6.0.0",
 		"react-router-dom": "^4.3.1",

@@ -54,7 +54,15 @@ class App extends Component {
 		return (
 			<Provider store={store}>
 				<Router>
-					<div className="App">
+					<div
+						className="App"
+						style={{
+							height: '100vh',
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'space-between',
+						}}
+					>
 						<Navbar />
 						<Route exact path="/" component={Landing} />
 						<div className="container">
@@ -86,7 +94,7 @@ class App extends Component {
 								/>
 							</Switch>
 						</div>
-						<Footer />
+						<Footer className="mb-0" />
 					</div>
 				</Router>
 			</Provider>

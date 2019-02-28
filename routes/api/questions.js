@@ -20,21 +20,8 @@ router.get('/test', (req, res) => res.json({ msg: 'Questions works' }));
 //@route GET api/questions/:course_id
 // @desc get first question
 // @access Private
-router.get('/:course_id/start', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/5c6f2a197d89e26466c9a039/start', passport.authenticate('jwt', { session: false }), (req, res) => {
 	let level = 1;
-
-	// set timer
-	let limit = 3;
-
-	const myVar = setInterval(myTimer, 1000);
-
-	function myTimer() {
-		if (limit <= 0) {
-			limit = 10000;
-			return console.log(`time's up!`);
-		}
-		return (limit -= 1);
-	}
 
 	// get level user
 	Profile.findOne({ user: req.user.id })
@@ -71,7 +58,7 @@ router.get('/:course_id/start', passport.authenticate('jwt', { session: false })
 				domanda = `(${x}*${y})%${z}?`;
 				questionPattern = '(${x}*${y})%${z} ?';
 				variables = `y = ${y}, x = ${x}, z = ${z}`;
-			} else if (level >= 4 && level < 5) {
+			} else if (level >= 4) {
 				y = Math.floor(Math.random() * 20 + 1);
 				x = Math.floor(Math.random() * 20 + 1);
 				z = Math.floor(Math.random() * 20 + 1);
@@ -80,8 +67,6 @@ router.get('/:course_id/start', passport.authenticate('jwt', { session: false })
 				domanda = `(${x}*${y})%(${z}*${w})?`;
 				questionPattern = '(${x}*${y})%${z}*${w} ?';
 				variables = `y = ${y}, x = ${x}, z = ${z}, w = ${w}`;
-			} else if (level >= 5) {
-				res.json({ msg: 'congratulation' });
 			} else {
 				console.log('error');
 			}
@@ -93,8 +78,16 @@ router.get('/:course_id/start', passport.authenticate('jwt', { session: false })
 				variablesValues: variables,
 				user: req.user.id,
 			});
-			console.log(newQuestion);
-			newQuestion.save().then(question => res.json(question));
+			time = newQuestion.date;
+			console.log(time);
+			newQuestion.save().then(question =>
+				res.json({
+					question,
+					time,
+				})
+			);
+
+			//.then(question => res.json(question));
 		});
 });
 
@@ -115,8 +108,6 @@ router.post('/:course_id', passport.authenticate('jwt', { session: false }), (re
 						console.log('right');
 						course.level += 1 / 3;
 					} else {
-						console.log(req.body.answer, req.body.solution);
-
 						console.log('wrong');
 						course.level -= 1 / 6;
 					}
@@ -154,7 +145,7 @@ router.post('/:course_id', passport.authenticate('jwt', { session: false }), (re
 				domanda = `(${x}*${y})%${z}?`;
 				questionPattern = '(${x}*${y})%${z} ?';
 				variables = `y = ${y}, x = ${x}, z = ${z}`;
-			} else if (level >= 4 && level < 5) {
+			} else if (level >= 4) {
 				y = Math.floor(Math.random() * 20 + 1);
 				x = Math.floor(Math.random() * 20 + 1);
 				z = Math.floor(Math.random() * 20 + 1);
@@ -163,8 +154,6 @@ router.post('/:course_id', passport.authenticate('jwt', { session: false }), (re
 				domanda = `(${x}*${y})%(${z}*${w})?`;
 				questionPattern = '(${x}*${y})%${z}*${w} ?';
 				variables = `y = ${y}, x = ${x}, z = ${z}, w = ${w}`;
-			} else if (level >= 5) {
-				res.json({ msg: 'congratulation' });
 			} else {
 				console.log('error');
 			}
@@ -176,7 +165,8 @@ router.post('/:course_id', passport.authenticate('jwt', { session: false }), (re
 				variablesValues: variables,
 				user: req.user.id,
 			});
-			newQuestion.save().then(question => res.json(question));
+
+			newQuestion.save().then(question => res.json({ question }));
 		});
 });
 
