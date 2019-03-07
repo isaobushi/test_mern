@@ -4,7 +4,7 @@ import { SET_CURRENT_USER } from './types';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 //register user
-const deakinUrl = 'http://10.137.0.158';
+const deakinUrl = 'http://10.137.0.158:5000';
 export const registerUser = (userData, history) => dispatch => {
 	axios
 		.post(`${deakinUrl}/api/users/register`, userData)
