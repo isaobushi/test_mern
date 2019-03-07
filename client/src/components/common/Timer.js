@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { withRouter } from 'react-router-dom';
-import { startTimer } from '../../actions/questionActions';
+import { endTimer } from '../../actions/questionActions';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -9,39 +9,44 @@ class Timer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			counter: 5,
+			countdownTime: 5,
 			styleButton: { display: 'block' },
 		};
 	}
-
-	countDown = () => {
-		this.setState({
-			counter: this.state.counter - 1,
-		});
-	};
+	componentDidMount() {
+		this.props.endTimer();
+		console.log('mounted');
+	}
+	componentWillUnmount() {
+		console.log('unmounted');
+		this.props.endTimer();
+	}
 
 	notify = () => {
 		toast('10 seconds Left');
-		this.setState({});
 	};
 
 	startTimer = () => {
-		this.setState({
-			styleButton: { display: 'none' },
-		});
-
-		setInterval(() => {
-			this.countDown();
-			if (this.state.counter === 0) {
-				this.props.history.push('/dashboard');
-			}
+		this.interval = setInterval(() => {
+			this.setState(
+				{
+					countdownTime: this.state.countdownTime - 1,
+					styleButton: { display: 'none' },
+				},
+				() => {
+					if (this.state.countdownTime === 0) {
+						clearInterval(this.interval);
+						this.props.endTimer(this.props.props.history);
+					}
+				}
+			);
 		}, 1000);
 	};
 
 	render() {
-		let counter = this.state.counter;
+		let countdownTime = this.state.countdownTime;
 
-		if (counter === 10) {
+		if (countdownTime === 10) {
 			this.notify();
 		}
 
@@ -50,15 +55,29 @@ class Timer extends Component {
 				<div>
 					<ToastContainer position="bottom-right" autoclose={1} />
 				</div>
-				<div className="container">
-					<div className="d-inline-block">{counter}</div>
-					<button className="btn bg-secondary m-1" style={this.state.styleButton} onClick={this.startTimer}>
+				<div className="container d-flex justifycontent-center flex-column mt-4" style={{ width: '100%' }}>
+					<button className="btn bg-secondary" style={this.state.styleButton} onClick={this.startTimer}>
 						Start
 					</button>
+					<div className="m-x auto text-center mt-1 display-4">{countdownTime}</div>
 				</div>
 			</div>
 		);
 	}
 }
 
-export default withRouter(Timer);
+Timer.propTypes = {
+	endTimer: propTypes.func.isRequired,
+};
+const mapStateToProps = state => dispatch => {
+	{
+		return {
+			questions: state.questions,
+		};
+	}
+};
+
+export default connect(
+	mapStateToProps,
+	{ endTimer }
+)(Timer);

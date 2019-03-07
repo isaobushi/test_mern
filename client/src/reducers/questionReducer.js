@@ -1,4 +1,4 @@
-import { GET_QUESTION, START_TIMER } from '../actions/types';
+import { GET_QUESTION, END_TIMER } from '../actions/types';
 
 const initialState = {
 	loading: false,
@@ -11,10 +11,10 @@ export default function(state = initialState, action) {
 				...state,
 				exercise: action.payload,
 			};
-		case START_TIMER:
+		case END_TIMER:
 			return {
 				...state,
-				startTimer: action.payload,
+				info: action.payload,
 			};
 		default:
 			return state;

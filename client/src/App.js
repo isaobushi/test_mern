@@ -57,13 +57,12 @@ class App extends Component {
 					<div
 						className="App"
 						style={{
-							height: '100vh',
 							display: 'flex',
 							flexDirection: 'column',
-							justifyContent: 'space-between',
+							justifyContent: 'space-evenly',
 						}}
 					>
-						<Navbar />
+						<Navbar className="fixed-top" style={{ width: '2rem' }} />
 						<Route exact path="/" component={Landing} />
 						<div className="container">
 							<Route exact path="/register" component={Register} />

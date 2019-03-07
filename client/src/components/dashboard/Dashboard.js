@@ -30,7 +30,6 @@ class Dashboard extends Component {
 							Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
 						</p>
 						<ProfileActions />
-						{/* TODO COURSE EDU */}
 						<div style={{ marginBottom: '60px' }} />
 						<button className="btn btn-danger" onClick={this.onDeleteClick.bind(this)}>
 							DELETE My Account
@@ -51,7 +50,7 @@ class Dashboard extends Component {
 			}
 		}
 		return (
-			<div className="dashboard">
+			<div className="dashboard" style={{ height: '60vh' }}>
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">

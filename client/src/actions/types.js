@@ -11,4 +11,4 @@ export const GET_SINGLE_COURSE = 'GET_SINGLE_COURSE';
 export const REGISTER_COURSE = 'REGISTER_COURSE';
 export const GET_QUESTION = 'GET_QUESTION';
 export const SEND_ANSWER = 'SEND_ANSWER';
-export const START_TIMER = 'START_TIMER';
+export const END_TIMER = 'END_TIMER';

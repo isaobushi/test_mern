@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const ProfileActions = () => {
 	return (
 		//Dashboard Actions
-		<div className="btn-group mb-4" role="group">
+		<div className="btn- mb-4 d-flex flex-column ">
 			<Link to="edit-profile" className="btn btn-light">
 				<i className="fas fa-user-circle text-info mr-1" /> Edit Profile
 			</Link>

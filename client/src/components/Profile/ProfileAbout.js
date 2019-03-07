@@ -22,7 +22,7 @@ class ProfileAbout extends Component {
 				<div key={index} className="p-3">
 					<i className="fa fa-check" /> {course.title}
 					<Link to={`/questions/${course._id}/start`}> Start Test </Link>
-					<p>Level: {course.level}</p>
+					<p>Level: {Math.trunc(course.level)}</p>
 				</div>
 			);
 		});

@@ -10,7 +10,7 @@ class Question extends Component {
 		super();
 		this.state = {
 			valueDisplay: '',
-			styleQuestion: { textAlign: 'center', fontSize: '30px', color: 'white' },
+			styleQuestion: { textAlign: 'center', fontSize: '30px', color: '#f9f9f9' },
 		};
 	}
 	componentDidMount() {
@@ -55,12 +55,11 @@ class Question extends Component {
 		const { exercise } = this.props.questions;
 		if (profile) {
 			level = (
-				<div style={{ marginLeft: '2rem' }} className="d-inline-block">
-					level: {profile.courses[0].level.toFixed(0)}
+				<div style={{ marginLeft: '2rem', fontSize: '2rem' }} className="d-inline-block">
+					Level: {profile.courses[0].level.toFixed(0)}
 				</div>
 			);
 		}
-
 		if (exercise) {
 			exerciseBody = (
 				<div className="m-auto" style={this.state.styleQuestion}>
@@ -72,96 +71,143 @@ class Question extends Component {
 		let display = this.state.valueDisplay;
 
 		return (
-			<div className="container m-auto flex bg-light">
-				<nav>
-					{level}
-					<div />
-				</nav>
-				{exerciseBody}
-				<div
-					className="display mx-auto mb-3"
-					style={{
-						width: '80%',
-						height: '10vh',
-						backgroundColor: '#f7f4ef',
-						// textAlign: 'center',
-						fontSize: '28px',
-					}}
-				>
-					{display}
-				</div>
-				{/* NUMBER PAD */}
-				<div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-					<div className="container ">
-						<div className="row justify-content-center">
-							<div onClick={this.addValue} value="1" type="button" className="btn btn col-1 m-1 rounded">
-								1
-							</div>
-							<div onClick={this.addValue} value="2" type="button" className="btn btn col-1 m-1 rounded ">
-								2
-							</div>
-							<div onClick={this.addValue} value="3" type="button" className="btn btn col-1 m-1 rounded ">
-								3
-							</div>
-							<div
-								onClick={this.removeLastValue}
-								value="1"
-								type="button"
-								className="btn btn col-2 m-1 rounded"
-							>
-								&#8592;
-							</div>
-						</div>
+			<div>
+				<div className="container m-auto flex bg-light mb-2 ">
+					<nav>
+						{level}
+						<div />
+					</nav>
+					{exerciseBody}
+					<div
+						className="display mx-auto mb-3"
+						style={{
+							width: '80%',
+							height: '7vh',
+							backgroundColor: '#f7f4ef',
+							textAlign: 'center',
+							fontSize: '28px',
+						}}
+					>
+						{display}
 					</div>
-					<div className="container ">
-						<div className="row justify-content-center">
-							<div
-								onClick={this.addValue}
-								value="4"
-								type="button"
-								className="btn col-1 m-1 rounded center"
-							>
-								4
-							</div>
-							<div onClick={this.addValue} value="5" type="button" className="btn  col-1 m-1  rounded">
-								5
-							</div>
-							<div onClick={this.addValue} value="6" type="button" className="btn col-1 m-1 rounded ">
-								6
-							</div>
-							<form onSubmit={this.onSubmit} value="1" type="submit" className="btn  col-2 m-1 rounded ">
-								<button
-									style={{
-										width: '100%',
-										margin: '0',
-										border: 'none',
-										backgroundColor: 'transparent',
-									}}
+					{/* NUMBER PAD */}
+					<div
+						className="btn-toolba "
+						role="toolbar"
+						aria-label="Toolbar with button groups "
+						style={{ display: 'none' }}
+					>
+						<div className="container ">
+							<div className="row justify-content-center">
+								<div
+									onClick={this.addValue}
+									value="1"
+									type="button"
+									className="btn btn col-1 m-1 rounded"
 								>
-									&#8627;
-								</button>
-							</form>
+									1
+								</div>
+								<div
+									onClick={this.addValue}
+									value="2"
+									type="button"
+									className="btn btn col-1 m-1 rounded "
+								>
+									2
+								</div>
+								<div
+									onClick={this.addValue}
+									value="3"
+									type="button"
+									className="btn btn col-1 m-1 rounded "
+								>
+									3
+								</div>
+								<div
+									onClick={this.removeLastValue}
+									value="1"
+									type="button"
+									className="btn btn col-2 m-1 rounded"
+								>
+									&#8592;
+								</div>
+							</div>
+						</div>
+						<div className="container ">
+							<div className="row justify-content-center">
+								<div
+									onClick={this.addValue}
+									value="4"
+									type="button"
+									className="btn col-1 m-1 rounded center"
+								>
+									4
+								</div>
+								<div
+									onClick={this.addValue}
+									value="5"
+									type="button"
+									className="btn  col-1 m-1  rounded"
+								>
+									5
+								</div>
+								<div onClick={this.addValue} value="6" type="button" className="btn col-1 m-1 rounded ">
+									6
+								</div>
+								<form
+									onSubmit={this.onSubmit}
+									value="1"
+									type="submit"
+									className="btn  col-2 m-1 rounded "
+								>
+									<button
+										style={{
+											width: '100%',
+											margin: '0',
+											border: 'none',
+											backgroundColor: 'transparent',
+										}}
+									>
+										&#8627;
+									</button>
+								</form>
+							</div>
+						</div>
+						<div className="container ">
+							<div className="row justify-content-center">
+								<div
+									onClick={this.addValue}
+									value="7"
+									type="button"
+									className="btn  col-1 m-1 rounded "
+								>
+									7
+								</div>
+								<div
+									onClick={this.addValue}
+									value="8"
+									type="button"
+									className="btn  col-1 m-1 rounded "
+								>
+									8
+								</div>
+								<div onClick={this.addValue} value="9" type="button" className="btn col-1 m-1 rounded ">
+									9
+								</div>
+								<div
+									onClick={this.addValue}
+									value="0"
+									type="button"
+									className="btn  col-2 m-1 rounded "
+								>
+									0
+								</div>
+							</div>
 						</div>
 					</div>
-					<div className="container ">
-						<div className="row justify-content-center">
-							<div onClick={this.addValue} value="7" type="button" className="btn  col-1 m-1 rounded ">
-								7
-							</div>
-							<div onClick={this.addValue} value="8" type="button" className="btn  col-1 m-1 rounded ">
-								8
-							</div>
-							<div onClick={this.addValue} value="9" type="button" className="btn col-1 m-1 rounded ">
-								9
-							</div>
-							<div onClick={this.addValue} value="0" type="button" className="btn  col-2 m-1 rounded ">
-								0
-							</div>
-						</div>
-					</div>
-					<div style={{ width: '50px' }} onClick={this.startTest} className="timer-container">
-						<Timer props={this.props} className="mx-auto d-inline-block d-flex justify-content-center" />
-					</div>
+				</div>
+				<div onClick={this.startTest} className=" mx-auto timer-container">
+					<Timer props={this.props} className="m-auto d-inline-block d-flex justify-content-right" />
 				</div>
 			</div>
 		);

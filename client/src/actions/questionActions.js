@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_COURSES, GET_QUESTION, START_TIMER } from './types';
+import { GET_COURSES, GET_QUESTION, END_TIMER, GET_ERRORS } from './types';
 
 // User get question page
 
@@ -38,9 +38,16 @@ export const sendAnswer = answer => dispatch => {
 		);
 };
 
-export const startTimer = history => dispatch => {
-	dispatch({
-		type: START_TIMER,
-		payload: history.push(`/profile`),
-	});
+// REDIRECT AT TIME === 0
+export const endTimer = history => dispatch => {
+	console.log('ok');
+	axios
+		.get(`/`)
+		.then(res => history.push('/'))
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: { error: `can't remand` },
+			})
+		);
 };

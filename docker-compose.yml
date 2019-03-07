@@ -1,0 +1,19 @@
+version: '3'
+services:
+    web:
+        container_name: express-app
+        image: express-app
+        build:
+        command: node index.js
+        poerts:
+            - '3000:3000'
+        depends_on:
+            - 'mongo'
+    mongo:
+        container_name: mongo
+        image: 'mongo'
+        ports: -"33875:33875"
+    adminmongo:
+        container_name: adminmongo
+        image: 'mrvautin/adminmongo'
+        ports: -"1234:1234"

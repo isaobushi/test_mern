@@ -32,7 +32,7 @@ class Navbar extends Component {
 		}
 
 		const authLinks = (
-			<ul className="navbar-nav ml-auto">
+			<ul className="navbar-nav ml-auto top-fixed">
 				<li className="nav-item">
 					<Link className="nav-link" to="/courses">
 						{' '}
@@ -80,7 +80,7 @@ class Navbar extends Component {
 			</ul>
 		);
 		return (
-			<nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+			<nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4 top-fixed" style={{ padding: '3rem' }}>
 				<div className="container">
 					<Link className="navbar-brand" to="/">
 						Tune In
