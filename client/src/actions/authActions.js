@@ -5,7 +5,11 @@ import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 //register user
 const deakinUrl = 'http://10.137.0.158:5000';
+//const deakinUrl = 'http://127.0.0.1:5000';
+
 export const registerUser = (userData, history) => dispatch => {
+	console.log('=== === IN === ===');
+	console.log(userData);
 	axios
 		.post(`${deakinUrl}/api/users/register`, userData)
 		.then(res => history.push('/login'))

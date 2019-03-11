@@ -8,6 +8,7 @@
 		"start": "node server.js",
 		"server": "nodemon server.js",
 		"client": "npm start --prefix client",
+		"modules": "npm i && cd client && npm i",
 		"dev": "concurrently \"npm run server\" \"npm run client\""
 	},
 	"author": "Andrea Mele",
