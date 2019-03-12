@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getSingleCourse, getCurrentProfile, registerCourse } from '../../actions/profileActions';
+import { getSingleCourse, getCurrentProfile, registerCourse, getProfileByHandle } from '../../actions/profileActions';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Spinner from '../common/Spinner';
@@ -30,11 +30,13 @@ class CoursePreview extends Component {
 			user_id: user.id,
 		};
 		this.props.registerCourse(userData);
+		this.props.history.push(`/courses`);
 	};
 
-	notify = () => toast('Registered');
-	//----------------------------------------------------------//
-	//----------------------------------------------------------////----------------------------------------------------------////----------------------------------------------------------//
+	notify = () => {
+		toast('Registered', { autoClose: 1500 });
+	};
+
 	render() {
 		const { courses } = this.props.profile;
 		const { user } = this.props.auth;
@@ -45,6 +47,10 @@ class CoursePreview extends Component {
 
 		coursePage = courses[0] === undefined ? <Spinner /> : coursePage;
 
+		if (coursePage !== undefined) {
+			console.log(this.props);
+		}
+
 		//get course
 		courses.map(course => {
 			if (course._id === id_course) {
@@ -52,7 +58,7 @@ class CoursePreview extends Component {
 			}
 		});
 
-		//set register button active ture -false
+		//set register button active true/false
 		let { buttonActive } = this.state;
 		courses.map(course => {
 			if (course._id === id_course) {
@@ -72,13 +78,13 @@ class CoursePreview extends Component {
 					Already Registered
 				</button>
 			);
-		} else if (id_course === '5c6f2a197d89e26466c9a039' && buttonActive === true) {
+		} else if (id_course === '5c85ecef84fd4500719acb3a' && buttonActive === true) {
 			buttonRegister = (
 				<button onClick={this.notify} className="btn btn-info btn-block mt-4">
 					Register{' '}
 				</button>
 			);
-		} else if (id_course !== '5c6f2a197d89e26466c9a039') {
+		} else if (id_course !== '5c85ecef84fd4500719acb3a') {
 			buttonRegister = (
 				<button disabled className="btn btn-info btn-block mt-4">
 					Coming Soon{' '}
@@ -89,7 +95,7 @@ class CoursePreview extends Component {
 		return (
 			<div>
 				<div>
-					<ToastContainer position="bottom-right" autoclose={100} />
+					<ToastContainer position="bottom-right" />
 				</div>
 				<div className="wrapper-description" />
 
@@ -108,6 +114,7 @@ class CoursePreview extends Component {
 CoursePreview.propTypes = {
 	getCurrentProfile: propTypes.func.isRequired,
 	getSingleCourse: propTypes.func.isRequired,
+	getProfileByHandle: propTypes.func.isRequired,
 	registerCourse: propTypes.func.isRequired,
 	auth: propTypes.object.isRequired,
 	profile: propTypes.object.isRequired,
@@ -120,5 +127,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getSingleCourse, getCurrentProfile, registerCourse }
+	{ getSingleCourse, getCurrentProfile, registerCourse, getProfileByHandle }
 )(CoursePreview);

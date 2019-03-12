@@ -20,7 +20,7 @@ class Courses extends Component {
 							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMY9h7MVxa7e0wJhP9aYOf35SR166NsoNIqF2uEv2uiGZ8OKoD"
 							alt="Card  cap"
 						/> */}
-						<i class="fas fa-book-open text-warning" />
+						<i className="fas fa-book-open text-warning" />
 						<h5 className="text-center">{course.title}</h5>
 						<p>{}</p>
 						<Link to={`/courses/${course._id}`} className="btn btn-secondary">

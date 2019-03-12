@@ -11,6 +11,7 @@ class Question extends Component {
 		this.state = {
 			valueDisplay: '',
 			styleQuestion: { textAlign: 'center', fontSize: '30px', color: '#f9f9f9' },
+			stylePad: { display: 'none' },
 		};
 	}
 	componentDidMount() {
@@ -32,6 +33,7 @@ class Question extends Component {
 	startTest = () => {
 		this.setState({
 			styleQuestion: { textAlign: 'center', fontSize: '30px', color: 'black' },
+			stylePad: { display: 'block' },
 		});
 	};
 	onSubmit = e => {
@@ -86,16 +88,19 @@ class Question extends Component {
 							backgroundColor: '#f7f4ef',
 							textAlign: 'center',
 							fontSize: '28px',
+							border: '1px solid grey',
+							borderRadius: '8px',
 						}}
 					>
 						{display}
 					</div>
 					{/* NUMBER PAD */}
+
 					<div
 						className="btn-toolba "
 						role="toolbar"
 						aria-label="Toolbar with button groups "
-						style={{ display: 'none' }}
+						style={this.state.stylePad}
 					>
 						<div className="container ">
 							<div className="row justify-content-center">
@@ -103,7 +108,7 @@ class Question extends Component {
 									onClick={this.addValue}
 									value="1"
 									type="button"
-									className="btn btn col-1 m-1 rounded"
+									className="btn border border-danger btn col-1 m-1 rounded"
 								>
 									1
 								</div>

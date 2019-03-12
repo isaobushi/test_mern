@@ -5,7 +5,7 @@ import { GET_COURSES, GET_QUESTION, END_TIMER, GET_ERRORS } from './types';
 
 export const getQuestion = () => dispatch => {
 	axios
-		.get(`/api/questions/5c6f2a197d89e26466c9a039/start`)
+		.get(`/api/questions/5c85ecef84fd4500719acb3a/start`)
 		.then(res =>
 			dispatch({
 				type: GET_QUESTION,
@@ -23,7 +23,7 @@ export const getQuestion = () => dispatch => {
 export const sendAnswer = answer => dispatch => {
 	console.log(answer);
 	axios
-		.post(`/api/questions/5c6f2a197d89e26466c9a039/`, answer)
+		.post(`/api/questions/5c85ecef84fd4500719acb3a/`, answer)
 		.then(res =>
 			dispatch({
 				type: GET_QUESTION,

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { withRouter } from 'react-router-dom';
 import { endTimer } from '../../actions/questionActions';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,7 +8,7 @@ class Timer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			countdownTime: 5,
+			countdownTime: 2260,
 			styleButton: { display: 'block' },
 		};
 	}

@@ -28,7 +28,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 });
 
 //@route GET api/courses/all
-// @desc add course to system ( by teacher )
+// @desc get courses
 // @access Private
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Course.find()
