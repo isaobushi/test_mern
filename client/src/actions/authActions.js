@@ -8,8 +8,6 @@ import jwt_decode from 'jwt-decode';
 const deakinUrl = 'http://localhost:5000';
 
 export const registerUser = (userData, history) => dispatch => {
-	console.log('=== === IN === ===');
-	console.log(userData);
 	axios
 		.post(`${deakinUrl}/api/users/register`, userData)
 		.then(res => history.push('/login'))

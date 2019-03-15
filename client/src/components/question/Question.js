@@ -211,8 +211,8 @@ class Question extends Component {
 						</div>
 					</div>
 				</div>
-				<div onClick={this.startTest} className=" mx-auto timer-container">
-					<Timer props={this.props} className="m-auto d-inline-block d-flex justify-content-right" />
+				<div className="mx-auto timer-container">
+					<Timer setPad={this.startTest} className="m-auto d-inline-block d-flex justify-content-right" />
 				</div>
 			</div>
 		);

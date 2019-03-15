@@ -8,13 +8,13 @@ class Timer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			countdownTime: 2260,
+			countdownTime: 90,
 			styleButton: { display: 'block' },
+			setPad: this.props.setPad,
 		};
 	}
 	componentDidMount() {
 		this.props.endTimer();
-		console.log('mounted');
 	}
 	componentWillUnmount() {
 		console.log('unmounted');
@@ -26,6 +26,7 @@ class Timer extends Component {
 	};
 
 	startTimer = () => {
+		this.state.setPad();
 		this.interval = setInterval(() => {
 			this.setState(
 				{

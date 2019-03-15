@@ -48,3 +48,9 @@ img {
 .form-control::placeholder {
 	color: #bbb !important;
 }
+
+.footer {
+	position: relative;
+	bottom: 0;
+	width: 100%;
+}

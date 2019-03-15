@@ -60,6 +60,7 @@ class App extends Component {
 							display: 'flex',
 							flexDirection: 'column',
 							justifyContent: 'space-evenly',
+							// height: '100vh',
 						}}
 					>
 						<Navbar className="fixed-top" style={{ width: '2rem' }} />
@@ -86,11 +87,7 @@ class App extends Component {
 								<PrivateRoute path="/courses/:id_courses" component={CoursePreview} />
 							</Switch>
 							<Switch>
-								<PrivateRoute
-									exact
-									path="/questions/5c85ecef84fd4500719acb3a/start"
-									component={Question}
-								/>
+								<PrivateRoute exact path="/questions/:id_course/start" component={Question} />
 							</Switch>
 						</div>
 						<Footer className="mb-0" />
