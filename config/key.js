@@ -1,6 +1,6 @@
 module.exports = {
 	mongoURI: 'mongodb://dda_dev:2uouwSLpiWc4xfg@10.137.0.158:27017/dda_dev',
-	//mongoURI:
+	// mongoURI:
 	// 'mongodb://' +
 	// process.env.MONGO_USER_DDA +
 	// ':' +

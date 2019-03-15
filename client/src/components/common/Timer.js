@@ -8,7 +8,7 @@ class Timer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			countdownTime: 90,
+			countdownTime: 15,
 			styleButton: { display: 'block' },
 			setPad: this.props.setPad,
 		};
@@ -45,7 +45,7 @@ class Timer extends Component {
 
 	render() {
 		let countdownTime = this.state.countdownTime;
-
+		const buttonOn = this.state.buttonOn;
 		if (countdownTime === 10) {
 			this.notify();
 		}
@@ -56,7 +56,7 @@ class Timer extends Component {
 					<ToastContainer position="bottom-right" autoclose={1} />
 				</div>
 				<div className="container d-flex justifycontent-center flex-column mt-4" style={{ width: '100%' }}>
-					<button className="btn bg-secondary" style={this.state.styleButton} onClick={this.startTimer}>
+					<button className={`btn bg-secondary`} style={this.state.styleButton} onClick={this.startTimer}>
 						Start
 					</button>
 					<div className="m-x auto text-center mt-1 display-4">{countdownTime}</div>
